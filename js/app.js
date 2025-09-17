@@ -1,7 +1,16 @@
+let swLocation = '/sw.js'; // Por defecto, en la raíz
+
+// Si estás en localhost, usa la raíz; si no, ajusta según tu estructura
+if (window.location.hostname === 'localhost') {
+	swLocation = '/sw.js';
+} else if (window.location.pathname.startsWith('/twittor')) {
+	swLocation = '/twittor/sw.js';
+}
+
 if ('serviceWorker' in navigator) {
 	window.addEventListener('load', function () {
 		navigator.serviceWorker
-			.register('/sw.js')
+			.register(swLocation)
 			.then(function (registration) {
 				console.log('Service Worker registrado con éxito:', registration);
 			})
